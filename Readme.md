@@ -8,7 +8,7 @@ https://github.com/mathomir/Mathomir_GIT
 
 It's a tiny little (one executable, no external dependencies) for taking mathematical notes. Take a look:
 
-![Screenshot](https://raw.githubusercontent.com/egrath/mathomir/Mathomir-Screenshot01.png)
+![Screenshot](https://raw.githubusercontent.com/egrath/Mathomir/master/Mathomir-Screenshot01.png)
 
 ## What are the current plans?
 
