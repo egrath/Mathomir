@@ -5290,7 +5290,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 							Toolbox->GetUniformFormatting();
 					}
 					exp->m_IsKeyboardEntry=exp->m_NumElements;
-					exp->m_KeyboardCursorPos=(int)strlen((exp->m_pElementList+exp->m_NumElements-1)->pElementObject->Data1);
+					exp->m_KeyboardCursorPos=static_cast<int>(strlen((exp->m_pElementList+exp->m_NumElements-1)->pElementObject->Data1));
 					KeyboardEntryStringLen=-1;
 					KeyboardEntryObject=(CObject*)exp;
 
@@ -6085,7 +6085,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 			InsertEmptyElement(m_IsKeyboardEntry-1,1,0,fcolor);
 			return 1;
 		}
-		if (m_KeyboardCursorPos<(short)strlen(theElement->pElementObject->Data1))
+		if (m_KeyboardCursorPos<strlen(theElement->pElementObject->Data1))
 		{
 			m_KeyboardCursorPos++;
 			DeselectExpression();
@@ -7646,7 +7646,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 		}
 
 		//delete the character to the right of cursor, if there is one
-		if (m_KeyboardCursorPos<(short)strlen(theElement->pElementObject->Data1))
+		if (m_KeyboardCursorPos<strlen(theElement->pElementObject->Data1))
 		{			
 			if ((lastkeystrokes[1]!=0x07) && (KeyboardEntryBaseObject))
 				((CMainFrame*)(theApp.m_pMainWnd))->UndoSave("del key",20304);
@@ -10069,10 +10069,9 @@ keyboardkeyhit_add_dot:
 		}
 	}
 
-
 	//finally, make space and add character to the variable
 	{
-		int i;
+		unsigned int i;
 		unsigned char ch=nChar&0xFF;
 
 		if (InhibitAllKeyHandling==0)
@@ -10460,7 +10459,7 @@ tElementStruct* CExpression::KeyboardSplitVariable(void)
 	tElementStruct* theElement=m_pElementList+m_IsKeyboardEntry-1;
 
 	if (theElement->pElementObject)
-		if (m_KeyboardCursorPos<(short)strlen(theElement->pElementObject->Data1))
+		if (m_KeyboardCursorPos<strlen(theElement->pElementObject->Data1))
 		{
 			InsertEmptyElement(m_IsKeyboardEntry-1,1,0,Toolbox->GetFormattingColor());
 			theElement=m_pElementList+m_IsKeyboardEntry-1;

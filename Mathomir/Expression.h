@@ -110,7 +110,7 @@ public:
 	short int m_FontSize;  //FontSize is the number in % (100% is default topmost font-size)
 	short int m_Selection; //selected insertion point
 	short int m_IsKeyboardEntry; //the index of currently edited variable (or 0 if editing mode is not active)
-	short int m_KeyboardCursorPos; //position of cursor within currently edited variable
+	size_t m_KeyboardCursorPos; //position of cursor within currently edited variable
 	short int m_InternalInsertionPoint;
 
 	char m_ParentheseShape; //contains '(', '[', '{'...

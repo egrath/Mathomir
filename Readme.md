@@ -1,6 +1,6 @@
 # Math-o-mir
 
-This is a (detached) fork of the original Math-o-mir developed by Danijel Gorpuc, whose code can be found at:
+This is a (detached) fork of the original Math-o-mir developed by Danijel Gorupec, whose code can be found at:
 
 https://github.com/mathomir/Mathomir_GIT
 
