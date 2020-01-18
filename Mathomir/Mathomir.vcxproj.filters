@@ -166,6 +166,7 @@
     <None Include="res\MathomirHandyHelp.chm">
       <Filter>Resources</Filter>
     </None>
+    <None Include="..\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

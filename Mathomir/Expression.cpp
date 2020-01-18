@@ -1454,7 +1454,7 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			int Selection=exp->m_Selection;
 			int IsKeyboardEntry=exp->m_IsKeyboardEntry;
 			int NumElements=exp->m_NumElements;
-			int KeyboardCursorPos=exp->m_KeyboardCursorPos;
+			int KeyboardCursorPos=static_cast<int>(exp->m_KeyboardCursorPos);
 			char ParenthesesFlags=exp->m_ParenthesesFlags;
 			tElementStruct *pElementList=exp->m_pElementList;
 
@@ -1654,7 +1654,7 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			if (theElement->Type==6)
 			{
 				CSize cz;
-				cz=DC->GetTextExtent(theElement->pElementObject->Data1,m_KeyboardCursorPos);
+				cz=DC->GetTextExtent(theElement->pElementObject->Data1,static_cast<int>(m_KeyboardCursorPos));
 				CPos=cz.cx;
 			}
 			int do_green;
@@ -5562,7 +5562,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				if (IsEditedVariableEmpty)
 					LastCursorPositionCursorPos=-1;
 				else
-					LastCursorPositionCursorPos=this->m_KeyboardCursorPos;
+					LastCursorPositionCursorPos=static_cast<int>(this->m_KeyboardCursorPos);
 				LastCursorPositionExpression=this;
 				LastCursorPositionPosition=m_IsKeyboardEntry;
 				LastCursorPositionBaseObject=KeyboardEntryBaseObject;
@@ -7728,7 +7728,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				m_IsKeyboardEntry--;
 				((CMainFrame*)(theApp.m_pMainWnd))->UndoSave("del key",20304);
 				int len=(int)strlen(theElement->pElementObject->Data1);
-				int lasts=23-m_KeyboardCursorPos;
+				int lasts=23-static_cast<int>(m_KeyboardCursorPos);
 				if (len<lasts) 
 					lasts=len;
 				else if ((theElement->Type==1) && (theElement->pElementObject->m_Text))
@@ -12581,7 +12581,7 @@ int CExpression::CalcChecksum()
 		c+=256*(m_Color+4*m_StartAsText+8*m_IsVertical);
 		c+=768*m_Alignment;
 		if (m_pPaternalExpression) c+=500;
-		c+=m_IsKeyboardEntry+m_KeyboardCursorPos;
+		c+=m_IsKeyboardEntry+static_cast<int>(m_KeyboardCursorPos);
 		c+=m_InternalInsertionPoint;
 	}
 

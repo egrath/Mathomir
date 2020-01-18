@@ -18,3 +18,5 @@ List of Ideas and their state:
 Date | Idea | State
 -----|------|------
 12.1.2020 | Make it compile with recent compilers | DONE, compiles with Visual Studio 2019 and MFC 14.2
+18.1.2020 | Build for x64 Platform | DONE, built a x64 version successfully, fixed all warnings; Binary release as soon as i am confident that x64 builds work smooth
+

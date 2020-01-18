@@ -6116,7 +6116,7 @@ int SteadyCursorY;
 int OnTimerCounter;
 unsigned int prevTimerTickTime;
 unsigned int TimerTickAccumulator;
-void CMathomirView::OnTimer(UINT nIDEvent)
+void CMathomirView::OnTimer(UINT_PTR nIDEvent)
 {
 	//faster timing functions here
 	unsigned int TimerTickTime=GetTickCount();

@@ -549,7 +549,7 @@ int CBitmapImage::SaveImageToFileForEditing(CObject *dwg)
 	fwrite(hdr,40+tablesize+hdr->biSizeImage,1,fil);
 	fclose(fil);
 
-	int result=(int)ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL);
+	int result=static_cast<int>(reinterpret_cast<uintptr_t>(ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL)));
 	if (result<=32) return 0;
 
 	return 1;
