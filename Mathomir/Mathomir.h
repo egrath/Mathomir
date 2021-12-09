@@ -17,6 +17,7 @@ class CMathomirApp : public CWinApp
 {
 public:
 	CMathomirApp();
+	~CMathomirApp();
 
 public:
 	virtual BOOL InitInstance();

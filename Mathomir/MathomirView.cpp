@@ -19,6 +19,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 *********************************************************************************************************/
 
+// Usage of GetTickCount instead of GetTickCount64
+#pragma warning( disable : 28159 )
+
 #include "stdafx.h"
 #include "Mathomir.h"
 
@@ -708,7 +711,7 @@ void CMathomirView::OnDraw(CDC* pDC)
 						if (ViewZoom&0xFF00) bitmapDC.SetPixelV(ax,*pnt+1,RGB(0,192,0));
 					}				
 				}
-				delete yarray;
+				delete[] yarray;
 			}
 		}
 		else
@@ -6935,7 +6938,7 @@ void CMathomirView::OnSysKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	//determine if SmallCaps should be written (the nChar is always uppercase)
 	if (SHIFTstate) SmallCaps=0;					
-	if (CAPSstate) SmallCaps=!SmallCaps;
+	if (CAPSstate) SmallCaps=~SmallCaps;
 
 	//SPECIAL HANDLING - enabling menu shorcut keys (ALT+E, ALT+F, ALT+V and ALT+F4)
 	//After  the ALT is pressed the VK_MENU code is first generated. This is detected here
@@ -6977,8 +6980,8 @@ void CMathomirView::OnSysKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		//this code allows Space+Alt to be interpreted as Alt+Space (changing the math/text typing mode)
 		CExpression *exp=(CExpression*)KeyboardEntryObject;
 		if ((exp->m_NumElements!=1) || (exp->m_pElementList->Type!=1) || (exp->m_pElementList->pElementObject->Data1[0]!=0))
-		if ((GetKeyState(VK_SPACE)&0xFFFE) && (nChar==VK_MENU))
-			SendKeyStroke(' ',0,Flags);
+			if ((GetKeyState(VK_SPACE)&0xFFFE) && (nChar==VK_MENU))
+				SendKeyStroke(' ',0,Flags);
 	}
 
 	if (nChar==VK_MENU) SendKeyStroke(0,0,Flags); //the ALT key
@@ -9118,7 +9121,7 @@ void CMathomirView::OnEditCopyImage()
 	if (ForceHighQualityImage) IsHighQualityRendering=1; else IsHighQualityRendering=0;
 	if (ForceHalftoneImage) IsHalftoneRendering=1; else IsHalftoneRendering=0;
 
-	short l,a,b;
+	short l=0,a=0,b=0;
 	int i;
 	int numsel=0;
 	for (i=0;i<NumDocumentElements;i++)
@@ -10616,11 +10619,9 @@ void CMathomirView::OnEditCopylatexcode()
 			len+=6;
 		}		
 	}
-	//len+=(int)strlen(foot);
 
 	HGLOBAL mem=GlobalAlloc(GMEM_MOVEABLE,len+256);
 	char *pnt=(char*)GlobalLock(mem);
-	//strcpy(pnt,head);pnt+=strlen(head);
 	int start=0;
 	for (int i=0;i<NumDocumentElements;i++)
 	{		
@@ -10637,8 +10638,10 @@ void CMathomirView::OnEditCopylatexcode()
 		
 		}		
 	}
-	//strcpy(pnt,foot);pnt+=strlen(foot);
-	*pnt=0;
+
+	if(pnt!=nullptr)
+		*pnt=0;
+
 	GlobalUnlock(mem);
 
 
