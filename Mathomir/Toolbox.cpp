@@ -4080,7 +4080,7 @@ finish_toolbox_mousemove:
 		int langid=6000;
 		char *text="";
 		char *easycast="";
-		short key;
+		short key=-1;
 		char *command="";
 		char buff[32];
 		strcpy(buff,"");
